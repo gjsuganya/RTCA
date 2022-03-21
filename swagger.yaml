@@ -1,0 +1,93 @@
+swagger: "2.0"
+info:
+  description: |-
+    Customer Health check -it get customer id as input and get the customer deatils and according to the deatil customer will under go for Health check.
+  version: "1.0.0"
+  title: "CUSTOMER HEALTH CHECK"
+
+
+host: "localhost"
+basePath: "/"
+
+schemes:
+  - "https"
+  - "http"
+paths:
+  /customerAddressEligibility:
+    post:
+      tags:
+        - "customerAddressEligibility"
+      summary: "Verify the Customer address"
+      description: "Check the Customer address"
+      operationId: "postCustomerAddressEligibility"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Customer Address need to be verified"
+          required: true
+          schema:
+            $ref: "#/definitions/Pet"
+      responses:
+        "200":
+          description: "Customer address is verified and valid customer."
+          schema:
+            $ref: "#/definitions/200Response"
+
+        "404":
+          description: "Invalid input/ Customer id should be the input."
+          schema:
+            $ref: "#/definitions/404Response"
+  /healthCheck:
+    get:
+      tags:
+        - "customerHealthCheck"
+      summary: "Verify the Customer Health"
+      description: "Check the Customer Health"
+      operationId: "getHealthCheck"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "CReturn Health Status"
+          schema:
+            $ref: "#/definitions/200HealthCheckResponse"
+definitions:
+  Pet:
+    type: "object"
+    required:
+      - "id"
+    properties:
+      id:
+        type: "integer"
+        example: 2423
+
+  200Response:
+    type: "object"
+    properties:
+      isEligible:
+        type: "boolean"
+      reason:
+        type: "string"
+  200HealthCheckResponse:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+        example: "Success"
+
+  404Response:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
