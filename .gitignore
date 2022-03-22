@@ -1,2 +1,4 @@
 .idea
 logger.iml
+/target/
+/.idea/

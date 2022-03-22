@@ -8,11 +8,11 @@
 		<version>2.2.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.gslab</groupId>
+	<groupId>com.gslab.rtca</groupId>
 	<artifactId>rtca</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>logger</name>
-	<description>Demo project for Spring Boot</description>
+	<name>rtca</name>
+	<description>RTCA</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -39,6 +39,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>1.6.5</version>
+		</dependency>
 
 
 
@@ -49,6 +54,38 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-codegen-maven-plugin</artifactId>
+				<version>2.3.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/swagger.yaml</inputSpec>
+							<language>spring</language>
+							<apiPackage>com.gslab.rtca.api</apiPackage>
+							<modelPackage>com.gslab.rtca.api</modelPackage>
+							<groupId>com.gslab.rtca.api</groupId>
+							<artifactId>rtca</artifactId>
+							<artifactVersion>0.0.1-SNAPSHOT</artifactVersion>
+							<generateSupportingFiles>false</generateSupportingFiles>
+							<configOptions>
+								<dateLibrary>joda</dateLibrary>
+								<interfaceOnly>true</interfaceOnly>
+								<serializableModel>false</serializableModel>
+								<sourceFolder>swagger</sourceFolder>
+								<useOptional>true</useOptional>
+								<useTag>true</useTag>
+								<dateLibrary>java8</dateLibrary>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+
 			</plugin>
 		</plugins>
 	</build>
