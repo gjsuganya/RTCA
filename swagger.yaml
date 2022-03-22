@@ -1,17 +1,20 @@
 swagger: "2.0"
 info:
   description: |-
-    Customer Health check -it get customer id as input and get the customer deatils and according to the deatil customer will under go for Health check.
+    RTCA is a customer address verification service. it get customer id as input and verify the address.Respond  whether the customer is valid or not
   version: "1.0.0"
-  title: "CUSTOMER HEALTH CHECK"
+  title: "REAL TIME CUSTOMER ADDRESS CHECK"
 
-
-host: "localhost"
-basePath: "/"
+host: localhost:8080
+basePath: /
 
 schemes:
   - "https"
   - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
 paths:
   /customerAddressEligibility:
     post:
@@ -20,17 +23,14 @@ paths:
       summary: "Verify the Customer address"
       description: "Check the Customer address"
       operationId: "postCustomerAddressEligibility"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+
       parameters:
         - in: "body"
           name: "body"
           description: "Customer Address need to be verified"
           required: true
           schema:
-            $ref: "#/definitions/Pet"
+            $ref: "#/definitions/Request"
       responses:
         "200":
           description: "Customer address is verified and valid customer."
@@ -44,24 +44,18 @@ paths:
   /healthCheck:
     get:
       tags:
-        - "customerHealthCheck"
-      summary: "Verify the Customer Health"
-      description: "Check the Customer Health"
+        - "healthCheck"
+      summary: "Verify the Health"
+      description: "Check the Health"
       operationId: "getHealthCheck"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
       responses:
         "200":
           description: "CReturn Health Status"
           schema:
             $ref: "#/definitions/200HealthCheckResponse"
 definitions:
-  Pet:
+  Request:
     type: "object"
-    required:
-      - "id"
     properties:
       id:
         type: "integer"
@@ -70,10 +64,13 @@ definitions:
   200Response:
     type: "object"
     properties:
-      isEligible:
-        type: "boolean"
-      reason:
-        type: "string"
+      data:
+        type: "object"
+        properties:
+          isEligible:
+            type: "boolean"
+          reason:
+            type: "string"
   200HealthCheckResponse:
     type: "object"
     properties:

@@ -8,8 +8,8 @@
 		<version>2.2.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.vmware</groupId>
-	<artifactId>logger</artifactId>
+	<groupId>com.gslab</groupId>
+	<artifactId>rtca</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>logger</name>
 	<description>Demo project for Spring Boot</description>
